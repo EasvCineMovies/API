@@ -20,6 +20,6 @@ public class Controller : ControllerBase
 
         var greetingRequest = new GreetingRequest(body);
             
-        return JsonConvert.SerializeObject(greetingRequest.GetGreeting());
+        return JsonConvert.SerializeObject(greetingRequest.Greeting);
     }
 }

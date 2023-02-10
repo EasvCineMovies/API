@@ -2,16 +2,12 @@
 
 public class GreetingRequest
 {
-    
-    private string _greeting;
-    
+
+    public string Greeting { get; }
+
     public GreetingRequest(dynamic? body)
     {
-        _greeting = body.greeting;
+        Greeting = body.greeting;
     }
 
-    public string GetGreeting()
-    {
-        return _greeting;
-    }
 }
