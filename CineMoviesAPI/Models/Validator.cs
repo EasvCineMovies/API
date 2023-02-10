@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Reflection;
-using DevOpsCineMovies.Entities;
+﻿using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Requests;
 
 namespace DevOpsCineMovies.Models;
@@ -35,31 +33,26 @@ public abstract class Validator
     ///     True if the properties are valid, otherwise false.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private static bool Properties<T>(T obj, Method method)
+    private static bool IsPropertiesValid<T>(T obj, Method method)
     {
-        var properties = obj.GetType().GetProperties();
+        var properties = obj!.GetType().GetProperties();
 
-        var result = true;
         foreach (var property in properties)
             if (property.Name == "Id")
                 switch (method)
                 {
                     case Method.Create:
                         if (property.GetValue(obj) == null) continue;
-                        result = false;
-                        break;
+                        return false;
                     case Method.Read:
                         if (property.GetValue(obj) != null) continue;
-                        result = false;
-                        break;
+                        return false;
                     case Method.Update:
                         if (property.GetValue(obj) != null) continue;
-                        result = false;
-                        break;
+                        return false;
                     case Method.Delete:
                         if (property.GetValue(obj) != null) continue;
-                        result = false;
-                        break;
+                        return false;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(method), method, null);
                 }
@@ -68,25 +61,21 @@ public abstract class Validator
                 {
                     case Method.Create:
                         if (property.GetValue(obj) != null) continue;
-                        result = false;
-                        break;
+                        return false;
                     case Method.Read:
                         if (property.GetValue(obj) == null) continue;
-                        result = false;
-                        break;
+                        return false;
                     case Method.Update:
                         if (property.GetValue(obj) != null) continue;
-                        result = false;
-                        break;
+                        return false;
                     case Method.Delete:
                         if (property.GetValue(obj) == null) continue;
-                        result = false;
-                        break;
+                        return false;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(method), method, null);
                 }
 
-        return result;
+        return true;
     }
 
     /// <summary>
@@ -115,43 +104,31 @@ public abstract class Validator
         if (body is null)
             return CustomResponse.Create("error", "Body is null");
 
-
-        T value;
-        switch (typeof(T).Name)
+        T value = typeof(T).Name switch
         {
-            case nameof(User):
-                value = method switch
-                {
-                    // Here we convert the request body to the entity that we expect to operate on.
-                    // Each different Request class method returns a different entity with a specific set of properties of type T.
-                    Method.Create => UserRequest.Create(body),
-                    Method.Read => UserRequest.Read(body),
-                    Method.Update => UserRequest.Update(body),
-                    Method.Delete => UserRequest.Delete(body),
-                    _ => CustomResponse.Create("error", "Invalid method")
-                };
-                break;
-            
-            // Here we will have to add more cases for each different entity we want to operate on.
+            nameof(User) => method switch
+            {
+                // Here we convert the request body to the entity that we expect to operate on.
+                // Each different Request class method returns a different entity with a specific set of properties of type T.
+                Method.Create => UserRequest.Create(body),
+                Method.Read => UserRequest.Read(body),
+                Method.Update => UserRequest.Update(body),
+                Method.Delete => UserRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
+            // Here you'll add more cases for each entity that you want to operate on.
             // Such as:
-            // case nameof(Movie):
-            //     value = method switch
-            //     {
-            //         Method.Create => MovieRequest.Create(body),
-            //         Method.Read => MovieRequest.Read(body),
-            //         Method.Update => MovieRequest.Update(body),
-            //         Method.Delete => MovieRequest.Delete(body),
-            //         _ => CustomResponse.Create("error", "Invalid method")
-            //     };
-            //     break;
+            // nameof(Movie) => method switch
+            // {
+            //     Method.Create => MovieRequest.Create(body),
+            //     Method.Read => MovieRequest.Read(body),
+            //     Method.Update => MovieRequest.Update(body),
+            //     Method.Delete => MovieRequest.Delete(body),
+            //     _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            // },
+            _ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
+        };
 
-            default:
-                return CustomResponse.Create("error", "Invalid type");
-        }
-
-        if (!Properties(value, method))
-            return CustomResponse.Create("error", "Invalid properties");
-
-        return value;
+        return IsPropertiesValid(value, method) ? value : CustomResponse.Create("error", "Invalid properties");
     }
 }
