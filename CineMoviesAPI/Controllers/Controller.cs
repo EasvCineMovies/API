@@ -19,7 +19,7 @@ public class Controller : ControllerBase
         var body = await BodyHandler.Get(Request.Body);
 
         var greetingRequest = new GreetingRequest(body);
-            
+
         return JsonConvert.SerializeObject(greetingRequest.Greeting);
     }
 }

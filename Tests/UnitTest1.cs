@@ -1,7 +1,5 @@
 using System.Text;
-using DevOpsCineMovies.Controllers;
 using Microsoft.AspNetCore.Http;
-
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Controller = DevOpsCineMovies.Controllers.Controller;
@@ -17,7 +15,7 @@ public class Tests
         {
             { "greeting", "Hello World!" }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
