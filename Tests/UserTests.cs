@@ -47,11 +47,12 @@ public class UserTests
             }
         };
 
-        var response = await userController.Create();
+        var r = JsonConvert.SerializeObject( await userController.Create());
+        var response = JObject.Parse(r);
+
         Assert.That(response, Is.Not.Null);
-        var responseJson = JObject.Parse(response.ToString() ?? string.Empty);
-        Assert.That(responseJson, Is.Not.Empty);
-        Assert.That(responseJson["status"]!.ToString() == "success", Is.True);
+        Assert.That(response, Is.Not.Empty);
+        Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
 
     [Test]
@@ -59,7 +60,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", _id.ToString() }
+            { "id", (_id-1).ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -78,12 +79,12 @@ public class UserTests
                 HttpContext = request
             }
         };
-
-        var response = await userController.Read();
+        
+        var r = JsonConvert.SerializeObject(await userController.Read());
+        var response = JObject.Parse(r);
         Assert.That(response, Is.Not.Null);
-        var responseJson = JObject.Parse(response.ToString() ?? string.Empty);
-        Assert.That(responseJson, Is.Not.Empty);
-        Assert.That(responseJson["status"]!.ToString() == "success", Is.True);
+        Assert.That(response, Is.Not.Empty);
+        Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
 
     [Test]
@@ -91,7 +92,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", _id.ToString() },
+            { "id", (_id-2).ToString() },
             { "name", "John Doeeeefsde" },
             { "phone", "123456789" },
             { "email", "something" },
@@ -114,12 +115,12 @@ public class UserTests
                 HttpContext = request
             }
         };
-
-        var response = await userController.Update();
+        
+        var r = JsonConvert.SerializeObject(await userController.Update());
+        var response = JObject.Parse(r);
         Assert.That(response, Is.Not.Null);
-        var responseJson = JObject.Parse(response.ToString() ?? string.Empty);
-        Assert.That(responseJson, Is.Not.Empty);
-        Assert.That(responseJson["status"]!.ToString() == "success", Is.True);
+        Assert.That(response, Is.Not.Empty);
+        Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
 
     [Test]
@@ -127,7 +128,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", _id.ToString() }
+            { "id", (_id-3).ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -146,11 +147,11 @@ public class UserTests
                 HttpContext = request
             }
         };
-
-        var response = await userController.Delete();
+        
+        var r = JsonConvert.SerializeObject(await userController.Delete());
+        var response = JObject.Parse(r);
         Assert.That(response, Is.Not.Null);
-        var responseJson = JObject.Parse(response.ToString() ?? string.Empty);
-        Assert.That(responseJson, Is.Not.Empty);
-        Assert.That(responseJson["status"]!.ToString() == "success", Is.True);
+        Assert.That(response, Is.Not.Empty);
+        Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
 }
