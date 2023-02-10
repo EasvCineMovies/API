@@ -1,4 +1,6 @@
-﻿using DevOpsCineMovies.Entities;
+﻿using System.Collections;
+using System.Reflection;
+using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Requests;
 
 namespace DevOpsCineMovies.Models;
@@ -61,7 +63,7 @@ public abstract class Validator
                     default:
                         throw new ArgumentOutOfRangeException(nameof(method), method, null);
                 }
-            else if (property.GetType() == typeof(IEnumerable<>))
+            else if (!property.PropertyType.IsGenericType)
                 switch (method)
                 {
                     case Method.Create:

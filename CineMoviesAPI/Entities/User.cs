@@ -12,5 +12,5 @@ public class User
 
     public string? Password { get; set; }
 
-    public virtual IEnumerable<Reservation> Reservations { get; } = new List<Reservation>();
+    public virtual ICollection<Reservation> Reservations { get; } = new List<Reservation>();
 }
