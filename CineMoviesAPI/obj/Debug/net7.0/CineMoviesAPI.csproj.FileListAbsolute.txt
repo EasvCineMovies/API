@@ -31,3 +31,4 @@ C:\Users\sonko\RiderProjects\DevOpsCineMovies\CineMoviesAPI\obj\Debug\net7.0\ref
 C:\Users\sonko\RiderProjects\DevOpsCineMovies\CineMoviesAPI\obj\Debug\net7.0\CineMoviesAPI.pdb
 C:\Users\sonko\RiderProjects\DevOpsCineMovies\CineMoviesAPI\obj\Debug\net7.0\CineMoviesAPI.genruntimeconfig.cache
 C:\Users\sonko\RiderProjects\DevOpsCineMovies\CineMoviesAPI\obj\Debug\net7.0\ref\CineMoviesAPI.dll
+C:\Users\sonko\RiderProjects\DevOpsCineMovies\CineMoviesAPI\bin\Debug\net7.0\Newtonsoft.Json.dll

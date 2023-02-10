@@ -20,6 +20,12 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:5144");
+    await next();
+});
+
 app.MapControllers();
 
 app.Run();

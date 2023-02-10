@@ -1,4 +1,6 @@
+using DevOpsCineMovies.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace DevOpsCineMovies.Controllers;
 
@@ -6,15 +8,20 @@ namespace DevOpsCineMovies.Controllers;
 [Route("[controller]")]
 public class Controller : ControllerBase
 {
+    private readonly BodyHandler _bodyHandler = new();
+    
     /// <summary>
     ///     Basic greeting method.
-    ///     Async is not required in this instance, but it is a good practice for future use.
     /// </summary>
     /// <returns></returns>
     [HttpGet]
     [Route(nameof(Greet))]
     public async Task<string> Greet()
     {
-        return "Hello World!";
+        var body = await _bodyHandler.Get(Request.Body);
+
+        var greeting = body.greeting;
+        
+        return greeting;
     }
 }
