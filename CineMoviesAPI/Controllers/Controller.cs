@@ -8,8 +8,6 @@ namespace DevOpsCineMovies.Controllers;
 [Route("[controller]")]
 public class Controller : ControllerBase
 {
-    private readonly BodyHandler _bodyHandler = new();
-    
     /// <summary>
     ///     Basic greeting method.
     /// </summary>
@@ -18,10 +16,10 @@ public class Controller : ControllerBase
     [Route(nameof(Greet))]
     public async Task<string> Greet()
     {
-        var body = await _bodyHandler.Get(Request.Body);
+        var body = await BodyHandler.Get(Request.Body);
 
-        var greeting = body.greeting;
+        var greetingRequest = new GreetingRequest(body);
         
-        return greeting;
+        return greetingRequest.GetGreeting();
     }
 }
