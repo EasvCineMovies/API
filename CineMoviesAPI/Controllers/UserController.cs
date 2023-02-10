@@ -91,6 +91,6 @@ public class UserController : ControllerBase
         _context.Users.Remove(dbUser);
         await _context.SaveChangesAsync();
 
-        return CustomResponse.Create("success", "User deleted", user);
+        return CustomResponse.Create("success", "User deleted", dbUser);
     }
 }

@@ -1,19 +1,16 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace DevOpsCineMovies.Models;
+﻿namespace DevOpsCineMovies.Models;
 
 public abstract class CustomResponse
 {
-    public static JObject Create(string status, string message, dynamic? data = null)
+    public static object Create(string status, string message, object? data = null)
     {
-        var response = new JObject
+        var notNullData = data ?? new object();
+        var response = new Dictionary<string,object>
         {
-            ["status"] = status,
-            ["message"] = message
+            { "status", status },
+            { "message", message },
+            { "data", notNullData }
         };
-
-        if (data != null) response["data"] = JToken.FromObject(data);
-
         return response;
     }
 }
