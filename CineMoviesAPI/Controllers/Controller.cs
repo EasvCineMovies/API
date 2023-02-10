@@ -12,14 +12,14 @@ public class Controller : ControllerBase
     ///     Basic greeting method.
     /// </summary>
     /// <returns></returns>
-    [HttpGet]
+    [HttpPost]
     [Route(nameof(Greet))]
     public async Task<string> Greet()
     {
         var body = await BodyHandler.Get(Request.Body);
 
         var greetingRequest = new GreetingRequest(body);
-        
-        return greetingRequest.GetGreeting();
+            
+        return JsonConvert.SerializeObject(greetingRequest.GetGreeting());
     }
 }
