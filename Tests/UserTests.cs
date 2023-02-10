@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,15 @@ namespace Tests;
 
 public class UserTests
 {
+    private int _id;
+    private MyDbContext _context = new();
+    
+    [SetUp]
+    public void Setup()
+    {
+        _id = _context.Users.Max(u => u.Id) ?? 0;
+    }
+    
     [Test]
     public async Task Create()
     {
@@ -49,7 +59,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", "3" }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -81,7 +91,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", "5" },
+            { "id", _id.ToString() },
             { "name", "John Doeeeefsde" },
             { "phone", "123456789" },
             { "email", "something" },
@@ -117,7 +127,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", "5" }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
