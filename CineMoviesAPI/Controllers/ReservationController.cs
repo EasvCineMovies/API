@@ -6,5 +6,4 @@ namespace DevOpsCineMovies.Controllers;
 [Route("[controller]")]
 public class ReservationController
 {
-    
 }

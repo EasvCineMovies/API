@@ -1,4 +1,4 @@
-﻿namespace DevOpsCineMovies.Models;
+﻿namespace DevOpsCineMovies.Requests;
 
 public class GreetingRequest
 {

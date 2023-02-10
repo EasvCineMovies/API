@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DevOpsCineMovies.Entities;
 
-namespace DevOpsCineMovies.Entities;
-
-public partial class User
+public class User
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; }
 
-    public virtual ICollection<Reservation> Reservations { get; } = new List<Reservation>();
+    public virtual IEnumerable<Reservation> Reservations { get; } = new List<Reservation>();
 }

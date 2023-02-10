@@ -1,4 +1,5 @@
 using DevOpsCineMovies.Models;
+using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

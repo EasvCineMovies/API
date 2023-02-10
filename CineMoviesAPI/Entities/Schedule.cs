@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DevOpsCineMovies.Entities;
 
-namespace DevOpsCineMovies.Entities;
-
-public partial class Schedule
+public class Schedule
 {
     public int Id { get; set; }
 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DevOpsCineMovies.Entities;
 
-namespace DevOpsCineMovies.Entities;
-
-public partial class Cinema
+public class Cinema
 {
     public int Id { get; set; }
 
