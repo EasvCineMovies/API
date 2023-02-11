@@ -116,6 +116,30 @@ public abstract class Validator
                 Method.Delete => UserRequest.Delete(body),
                 _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
             },
+            nameof(Movie) => method switch
+            {
+                Method.Create => MovieRequest.Create(body),
+                Method.Read => MovieRequest.Read(body),
+                Method.Update => MovieRequest.Update(body),
+                Method.Delete => MovieRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
+            nameof(Seat) => method switch
+            {
+                Method.Create => SeatRequest.Create(body),
+                Method.Read => SeatRequest.Read(body),
+                Method.Update => SeatRequest.Update(body),
+                Method.Delete => SeatRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
+            nameof(Cinema) => method switch
+            {
+                Method.Create => CinemaRequest.Create(body),
+                Method.Read => CinemaRequest.Read(body),
+                Method.Update => CinemaRequest.Update(body),
+                Method.Delete => CinemaRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
             // Here you'll add more cases for each entity that you want to operate on.
             // Such as:
             // nameof(Movie) => method switch

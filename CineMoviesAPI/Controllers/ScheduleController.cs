@@ -4,6 +4,6 @@ namespace DevOpsCineMovies.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ScheduleController
+public class ScheduleController : ControllerBase
 {
 }

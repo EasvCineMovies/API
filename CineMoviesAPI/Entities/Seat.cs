@@ -12,5 +12,6 @@ public class Seat
 
     public virtual Cinema? Cinema { get; set; }
 
+    public bool IsAvailable { get; set; }
     public virtual ICollection<Reservation> Reservations { get; } = new List<Reservation>();
 }
