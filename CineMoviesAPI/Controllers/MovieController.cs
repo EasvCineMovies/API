@@ -15,7 +15,7 @@ public class MovieController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Create))]
-    public async Task<Object> Create()
+    public async Task<object> Create()
     {
         var response = await Validator.Body<Movie>(Request.Body, Method.Create);
         if (response is not Movie movie)
@@ -29,7 +29,7 @@ public class MovieController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Read))]
-    public async Task<Object> Read()
+    public async Task<object> Read()
     {
         var response = await Validator.Body<Movie>(Request.Body, Method.Read);
         if (response is not Movie movie)
@@ -42,7 +42,7 @@ public class MovieController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Update))]
-    public async Task<Object> Update()
+    public async Task<object> Update()
     {
         var response = await Validator.Body<Movie>(Request.Body, Method.Update);
         if (response is not Movie movie)
@@ -52,7 +52,6 @@ public class MovieController : ControllerBase
         if (dbMovie is null)
             return CustomResponse.Create("error", "Movie not found");
         
-        dbMovie.Id = movie.Id;
         dbMovie.Name = movie.Name;
         dbMovie.Description = movie.Description;
         dbMovie.Duration = movie.Duration;
@@ -60,12 +59,12 @@ public class MovieController : ControllerBase
         dbMovie.CinemaId = movie.CinemaId;
         await _context.SaveChangesAsync();
         
-        return CustomResponse.Create("success", "Movie updated", movie);
+        return CustomResponse.Create("success", "Movie updated", dbMovie);
     }
     
     [HttpPost]
     [Route(nameof(Delete))]
-    public async Task<Object> Delete()
+    public async Task<object> Delete()
     {
         var response = await Validator.Body<Movie>(Request.Body, Method.Delete);
         if (response is not Movie movie)
@@ -78,6 +77,6 @@ public class MovieController : ControllerBase
         _context.Movies.Remove(dbMovie);
         await _context.SaveChangesAsync();
         
-        return CustomResponse.Create("success", "Movie deleted");
+        return CustomResponse.Create("success", "Movie deleted", dbMovie);
     }
 }

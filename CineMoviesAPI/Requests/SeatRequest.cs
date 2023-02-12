@@ -8,9 +8,9 @@ public abstract class SeatRequest
     {
         return new Seat
         {
-            CinemaId = body.cinemaId,
             Row = body.row,
-            Column = body.column
+            Column = body.column,
+            CinemaId = body.cinemaId
         };
     }
 
@@ -27,9 +27,9 @@ public abstract class SeatRequest
         return new Seat
         {
             Id = body.id,
-            CinemaId = body.cinemaId,
             Row = body.row,
-            Column = body.column
+            Column = body.column,
+            CinemaId = body.cinemaId
         };
     }
 

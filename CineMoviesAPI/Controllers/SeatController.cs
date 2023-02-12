@@ -11,16 +11,7 @@ namespace DevOpsCineMovies.Controllers;
 public class SeatController : ControllerBase
 {
     private readonly MyDbContext _context = new();
-    /// <summary>
-    /// Check if seat is available for the Update method
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public bool IsAvailable (int id)
-    {
-        var seat = _context.Seats.Find(id);
-        return seat.IsAvailable;
-    }
+    
     [HttpPost]
     [Route(nameof(Create))]
     public async Task<object> Create()
@@ -62,10 +53,10 @@ public class SeatController : ControllerBase
         
         dbSeat.Row = seat.Row;
         dbSeat.Column = seat.Column;
-        dbSeat.IsAvailable = seat.IsAvailable;
+        dbSeat.CinemaId = seat.CinemaId;
         await _context.SaveChangesAsync();
         
-        return CustomResponse.Create("success", "Seat updated", seat);
+        return CustomResponse.Create("success", "Seat updated", dbSeat);
     }
     
     [HttpPost]
@@ -83,6 +74,6 @@ public class SeatController : ControllerBase
         _context.Seats.Remove(dbSeat);
         await _context.SaveChangesAsync();
         
-        return CustomResponse.Create("success", "Seat deleted");
+        return CustomResponse.Create("success", "Seat deleted", dbSeat);
     }
 }

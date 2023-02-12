@@ -13,7 +13,7 @@ public class CinemaController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Create))]
-    public async Task<Object> Create()
+    public async Task<object> Create()
     {
         var response = await Validator.Body<Cinema>(Request.Body, Method.Create);
         if (response is not Cinema cinema)
@@ -27,7 +27,7 @@ public class CinemaController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Read))]
-    public async Task<Object> Read()
+    public async Task<object> Read()
     {
         var response = await Validator.Body<Cinema>(Request.Body, Method.Read);
         if (response is not Cinema cinema)
@@ -40,7 +40,7 @@ public class CinemaController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Update))]
-    public async Task<Object> Update()
+    public async Task<object> Update()
     {
         var response = await Validator.Body<Cinema>(Request.Body, Method.Update);
         if (response is not Cinema cinema)
@@ -50,7 +50,6 @@ public class CinemaController : ControllerBase
         if (dbCinema is null)
             return CustomResponse.Create("error", "Cinema not found");
         
-        dbCinema.Id = cinema.Id;
         dbCinema.Name = cinema.Name;
         dbCinema.Address = cinema.Address;
         await _context.SaveChangesAsync();
@@ -60,7 +59,7 @@ public class CinemaController : ControllerBase
     
     [HttpPost]
     [Route(nameof(Delete))]
-    public async Task<Object> Delete()
+    public async Task<object> Delete()
     {
         var response = await Validator.Body<Cinema>(Request.Body, Method.Delete);
         if (response is not Cinema cinema)
@@ -73,6 +72,6 @@ public class CinemaController : ControllerBase
         _context.Cinemas.Remove(dbCinema);
         await _context.SaveChangesAsync();
         
-        return CustomResponse.Create("success", "Cinema deleted");
+        return CustomResponse.Create("success", "Cinema deleted", dbCinema);
     }
 }
