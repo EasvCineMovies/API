@@ -56,7 +56,7 @@ public abstract class Validator
                     default:
                         throw new ArgumentOutOfRangeException(nameof(method), method, null);
                 }
-            else if (!property.PropertyType.IsGenericType)
+            else if (!property.GetMethod.IsVirtual)
                 switch (method)
                 {
                     case Method.Create:
@@ -108,25 +108,53 @@ public abstract class Validator
         {
             nameof(User) => method switch
             {
-                // Here we convert the request body to the entity that we expect to operate on.
-                // Each different Request class method returns a different entity with a specific set of properties of type T.
                 Method.Create => UserRequest.Create(body),
                 Method.Read => UserRequest.Read(body),
                 Method.Update => UserRequest.Update(body),
                 Method.Delete => UserRequest.Delete(body),
                 _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
             },
-            // Here you'll add more cases for each entity that you want to operate on.
-            // Such as:
-            // nameof(Movie) => method switch
-            // {
-            //     Method.Create => MovieRequest.Create(body),
-            //     Method.Read => MovieRequest.Read(body),
-            //     Method.Update => MovieRequest.Update(body),
-            //     Method.Delete => MovieRequest.Delete(body),
-            //     _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-            // },
-            _ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
+            nameof(Movie) => method switch
+            {
+                Method.Create => MovieRequest.Create(body),
+                Method.Read => MovieRequest.Read(body),
+                Method.Update => MovieRequest.Update(body),
+                Method.Delete => MovieRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
+            nameof(Seat) => method switch
+            {
+                Method.Create => SeatRequest.Create(body),
+                Method.Read => SeatRequest.Read(body),
+                Method.Update => SeatRequest.Update(body),
+                Method.Delete => SeatRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
+            nameof(Cinema) => method switch
+            {
+                Method.Create => CinemaRequest.Create(body),
+                Method.Read => CinemaRequest.Read(body),
+                Method.Update => CinemaRequest.Update(body),
+                Method.Delete => CinemaRequest.Delete(body),
+                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+            },
+			nameof(Reservation) => method switch
+			{
+				Method.Create => ReservationRequest.Create(body),
+				Method.Read => ReservationRequest.Read(body),
+				Method.Update => ReservationRequest.Update(body),
+				Method.Delete => ReservationRequest.Delete(body),
+				_ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+			},
+			nameof(Schedule) => method switch
+			{
+				Method.Create => ScheduleRequest.Create(body),
+				Method.Read => ScheduleRequest.Read(body),
+				Method.Update => ScheduleRequest.Update(body),
+				Method.Delete => ScheduleRequest.Delete(body),
+				_ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+			},
+			_ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
         };
 
         return IsPropertiesValid(value, method) ? value : CustomResponse.Create("error", "Invalid properties");

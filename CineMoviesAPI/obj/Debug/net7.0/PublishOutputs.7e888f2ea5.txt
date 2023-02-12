@@ -1,0 +1,13 @@
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\CineMoviesAPI.exe
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\appsettings.Development.json
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\appsettings.json
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\CineMoviesAPI.dll
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\CineMoviesAPI.deps.json
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\CineMoviesAPI.runtimeconfig.json
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\CineMoviesAPI.pdb
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\Microsoft.OpenApi.dll
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\Newtonsoft.Json.dll
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\sonko\AppData\Local\Temp\rider-publish18110267249083529876\Swashbuckle.AspNetCore.SwaggerUI.dll

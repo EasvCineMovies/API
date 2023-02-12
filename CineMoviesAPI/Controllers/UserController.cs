@@ -73,7 +73,7 @@ public class UserController : ControllerBase
         dbUser.Password = user.Password;
         await _context.SaveChangesAsync();
 
-        return CustomResponse.Create("success", "User updated", user);
+        return CustomResponse.Create("success", "User updated", dbUser);
     }
 
     [HttpPost]

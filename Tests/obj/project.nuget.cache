@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kKhhxHyKojPUPCJoflX3RNjvakeRP/hrXo/1tfQnn17VBIDdVXiOIXX4UaXfMC2/YLUwGqXp7gkoPEfSuxD5Ag==",
+  "dgSpecHash": "Kck8rYA9Uwsv2mE62zrKNubdVLxiMeX+L8tXcKoXusI5Jg/kh40Cpc/EMQLzTB+YLy6p2zqIsBuW0QvMxz/Kuw==",
   "success": true,
   "projectFilePath": "C:\\Users\\sonko\\RiderProjects\\DevOpsCineMovies\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
@@ -92,7 +92,7 @@
     "C:\\Users\\sonko\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\system.text.encoding.codepages\\5.0.0\\system.text.encoding.codepages.5.0.0.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\sonko\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\sonko\\.nuget\\packages\\system.text.json\\7.0.1\\system.text.json.7.0.1.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
