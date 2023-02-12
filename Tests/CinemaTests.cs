@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Tests;
 
-public class UserTests
+public class CinemaTests
 {
     private readonly MyDbContext _context = new();
     private int _id;
@@ -16,7 +16,7 @@ public class UserTests
     [SetUp]
     public void Setup()
     {
-        _id = _context.Users.Max(u => u.Id) ?? 0;
+        _id = _context.Cinemas.Max(c => c.Id) ?? 0;
     }
 
     [Test]
@@ -24,10 +24,8 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "name", "John Doe" },
-            { "phone", "123456789" },
-            { "email", "something" },
-            { "password", "something" }
+            { "name", "Cinema test" },
+            { "address", "Address test" }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -38,8 +36,7 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var cinemaController = new CinemaController
         {
             ControllerContext = new ControllerContext
             {
@@ -47,7 +44,7 @@ public class UserTests
             }
         };
 
-        var r = JsonConvert.SerializeObject(await userController.Create());
+        var r = JsonConvert.SerializeObject(await cinemaController.Create());
         var response = JObject.Parse(r);
 
         Assert.That(response, Is.Not.Null);
@@ -71,8 +68,7 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var cinemaController = new CinemaController
         {
             ControllerContext = new ControllerContext
             {
@@ -80,8 +76,9 @@ public class UserTests
             }
         };
 
-        var r = JsonConvert.SerializeObject(await userController.Read());
+        var r = JsonConvert.SerializeObject(await cinemaController.Read());
         var response = JObject.Parse(r);
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
@@ -93,10 +90,8 @@ public class UserTests
         var body = new Dictionary<string, string>
         {
             { "id", (_id - 2).ToString() },
-            { "name", "John Doeeeefsde" },
-            { "phone", "123456789" },
-            { "email", "something" },
-            { "password", "something" }
+            { "name", "Cinema test2" },
+            { "address", "Address test2" }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -107,8 +102,7 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var cinemaController = new CinemaController
         {
             ControllerContext = new ControllerContext
             {
@@ -116,8 +110,9 @@ public class UserTests
             }
         };
 
-        var r = JsonConvert.SerializeObject(await userController.Update());
+        var r = JsonConvert.SerializeObject(await cinemaController.Update());
         var response = JObject.Parse(r);
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
@@ -139,8 +134,7 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var cinemaController = new CinemaController
         {
             ControllerContext = new ControllerContext
             {
@@ -148,8 +142,9 @@ public class UserTests
             }
         };
 
-        var r = JsonConvert.SerializeObject(await userController.Delete());
+        var r = JsonConvert.SerializeObject(await cinemaController.Delete());
         var response = JObject.Parse(r);
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);

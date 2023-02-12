@@ -12,7 +12,7 @@ public abstract class MovieRequest
             CinemaId = body.cinemaId,
             Description = body.description,
             Duration = body.duration,
-            Genre = body.Genre
+            Genre = body.genre
         };
     }
 
@@ -33,7 +33,7 @@ public abstract class MovieRequest
             CinemaId = body.cinemaId,
             Description = body.description,
             Duration = body.duration,
-            Genre = body.Genre
+            Genre = body.genre
         };
     }
 

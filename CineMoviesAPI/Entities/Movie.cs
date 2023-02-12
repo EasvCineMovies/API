@@ -6,13 +6,13 @@ public class Movie
 
     public int? CinemaId { get; set; }
 
-    public string? Name { get; set; } = null!;
+    public string? Name { get; set; }
 
-    public string? Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     public int? Duration { get; set; }
 
-    public string? Genre { get; set; } = null!;
+    public string? Genre { get; set; }
 
     public virtual Cinema? Cinema { get; set; }
 

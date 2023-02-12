@@ -8,28 +8,27 @@ using Newtonsoft.Json.Linq;
 
 namespace Tests;
 
-public class UserTests
+public class SeatTests
 {
     private readonly MyDbContext _context = new();
     private int _id;
-
+    
     [SetUp]
     public void Setup()
     {
-        _id = _context.Users.Max(u => u.Id) ?? 0;
+        _id = _context.Seats.Max(s => s.Id) ?? 0;
     }
-
+    
     [Test]
     public async Task Create()
     {
         var body = new Dictionary<string, string>
         {
-            { "name", "John Doe" },
-            { "phone", "123456789" },
-            { "email", "something" },
-            { "password", "something" }
+            { "row", "1" },
+            { "column", "1" },
+            { "cinemaId", "1" },
         };
-
+        
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -38,31 +37,30 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var seatController = new SeatController
         {
             ControllerContext = new ControllerContext
             {
                 HttpContext = request
             }
         };
-
-        var r = JsonConvert.SerializeObject(await userController.Create());
+        
+        var r = JsonConvert.SerializeObject(await seatController.Create());
         var response = JObject.Parse(r);
-
+        
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-
+    
     [Test]
     public async Task Read()
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 1).ToString() }
+            { "id", (_id-1).ToString() }
         };
-
+        
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -71,34 +69,33 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var seatController = new SeatController
         {
             ControllerContext = new ControllerContext
             {
                 HttpContext = request
             }
         };
-
-        var r = JsonConvert.SerializeObject(await userController.Read());
+        
+        var r = JsonConvert.SerializeObject(await seatController.Read());
         var response = JObject.Parse(r);
+        
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-
+    
     [Test]
     public async Task Update()
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 2).ToString() },
-            { "name", "John Doeeeefsde" },
-            { "phone", "123456789" },
-            { "email", "something" },
-            { "password", "something" }
+            { "id", (_id-2).ToString() },
+            { "row", "1" },
+            { "column", "1" },
+            { "cinemaId", "1" },
         };
-
+        
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -107,30 +104,30 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var seatController = new SeatController
         {
             ControllerContext = new ControllerContext
             {
                 HttpContext = request
             }
         };
-
-        var r = JsonConvert.SerializeObject(await userController.Update());
+        
+        var r = JsonConvert.SerializeObject(await seatController.Update());
         var response = JObject.Parse(r);
+        
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-
+    
     [Test]
     public async Task Delete()
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 3).ToString() }
+            { "id", (_id-3).ToString() }
         };
-
+        
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -139,17 +136,17 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-
-        var userController = new UserController
+        var seatController = new SeatController
         {
             ControllerContext = new ControllerContext
             {
                 HttpContext = request
             }
         };
-
-        var r = JsonConvert.SerializeObject(await userController.Delete());
+        
+        var r = JsonConvert.SerializeObject(await seatController.Delete());
         var response = JObject.Parse(r);
+        
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);

@@ -9,7 +9,7 @@ public abstract class CinemaRequest
         return new Cinema
         {
             Name = body.name,
-            Address = body.address,
+            Address = body.address
         };
     }
 
@@ -27,7 +27,7 @@ public abstract class CinemaRequest
         {
             Id = body.id,
             Name = body.name,
-            Address = body.address,
+            Address = body.address
         };
     }
 

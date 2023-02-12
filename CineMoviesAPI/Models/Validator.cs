@@ -56,7 +56,7 @@ public abstract class Validator
                     default:
                         throw new ArgumentOutOfRangeException(nameof(method), method, null);
                 }
-            else if (!property.PropertyType.IsGenericType)
+            else if (!property.GetMethod.IsVirtual)
                 switch (method)
                 {
                     case Method.Create:
@@ -108,8 +108,6 @@ public abstract class Validator
         {
             nameof(User) => method switch
             {
-                // Here we convert the request body to the entity that we expect to operate on.
-                // Each different Request class method returns a different entity with a specific set of properties of type T.
                 Method.Create => UserRequest.Create(body),
                 Method.Read => UserRequest.Read(body),
                 Method.Update => UserRequest.Update(body),
@@ -140,16 +138,6 @@ public abstract class Validator
                 Method.Delete => CinemaRequest.Delete(body),
                 _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
             },
-            // Here you'll add more cases for each entity that you want to operate on.
-            // Such as:
-            // nameof(Movie) => method switch
-            // {
-            //     Method.Create => MovieRequest.Create(body),
-            //     Method.Read => MovieRequest.Read(body),
-            //     Method.Update => MovieRequest.Update(body),
-            //     Method.Delete => MovieRequest.Delete(body),
-            //     _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-            // },
             _ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
         };
 
