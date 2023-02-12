@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,24 @@ internal class ReservationTests
 {
 	private readonly MyDbContext _context = new();
 	private int _id;
+	
+	private int _minUserId;
+	private int _minSeatId;
+	private int _minMovieId;
+	private int _minCinemaId;
+	private int _minScheduleId;
+	
 	private UserTests userTests = new();
 
 	[SetUp]
 	public void Setup()
 	{
 		_id = _context.Reservations.Max(s => s.Id) ?? 0;
+		_minUserId = _context.Users.Min(s => s.Id) ?? 0;
+		_minSeatId = _context.Seats.Min(s => s.Id) ?? 0;
+		_minMovieId = _context.Movies.Min(s => s.Id) ?? 0;
+		_minCinemaId = _context.Cinemas.Min(s => s.Id) ?? 0;
+		_minScheduleId = _context.Schedules.Min(s => s.Id) ?? 0;
 	}
 
 	[Test]
@@ -31,12 +44,12 @@ internal class ReservationTests
 	{
 		var body = new Dictionary<string, string>
 		{
-			{ "userId", "1" },
-			{ "seatId", "1" },
-			{ "movieId", "1" },
-			{ "cinemaId", "1" },
-			{ "scheduleId", "1" },
-			{ "reservationDate", "2000-01-01 10:00:00" },
+			{ "userId", _minUserId.ToString() },
+			{ "seatId", _minSeatId.ToString() },
+			{ "movieId", _minMovieId.ToString() },
+			{ "cinemaId", _minCinemaId.ToString() },
+			{ "scheduleId", _minScheduleId.ToString() },
+			{ "reservationDate", DateTime.Now.ToString(CultureInfo.InvariantCulture) },
 			{ "price", "499" }
 		};
 
@@ -102,12 +115,12 @@ internal class ReservationTests
 		var body = new Dictionary<string, string>
 		{
 			{ "id", (_id-2).ToString() },
-			{ "userId", "1" },
-			{ "seatId", "1" },
-			{ "movieId", "1" },
-			{ "cinemaId", "1" },
-			{ "scheduleId", "1" },
-			{ "reservationDate", "2000-01-01 11:00:00" },
+			{ "userId", _minUserId.ToString() },
+			{ "seatId", _minSeatId.ToString() },
+			{ "movieId", _minMovieId.ToString() },
+			{ "cinemaId", _minCinemaId.ToString() },
+			{ "scheduleId", _minScheduleId.ToString() },
+			{ "reservationDate", DateTime.Now.ToString(CultureInfo.InvariantCulture) },
 			{ "price", "499" }
 		};
 

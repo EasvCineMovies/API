@@ -1,17 +1,4 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=963d2b47_002Db6e2_002D4214_002D9864_002De00f526ab61a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GreetTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.Tests.GreetTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.UserTests.Create&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.UserTests.Update&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.UserTests.Read&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.UserTests.Delete&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.CinemaTests.Create&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.CinemaTests.Read&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.CinemaTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.MovieTests.Create&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.MovieTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.SeatTests.Create&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::702229AB-2685-4C2F-97FC-F9BEF55F0CB1::net7.0::Tests.SeatTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="C:\Users\sonko\RiderProjects\DevOpsCineMovies\Tests" Presentation="&amp;lt;Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
