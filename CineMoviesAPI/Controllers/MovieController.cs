@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DevOpsCineMovies.Controllers;
 
 /// <summary>
-///     Movie controller by Luca the guy with the biggest cock
+///     Movie controller by Luca the guy with the smallest *hehe* cock
 /// </summary>
 [ApiController]
 [Route("[controller]")]
