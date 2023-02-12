@@ -138,7 +138,23 @@ public abstract class Validator
                 Method.Delete => CinemaRequest.Delete(body),
                 _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
             },
-            _ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
+			nameof(Reservation) => method switch
+			{
+				Method.Create => ReservationRequest.Create(body),
+				Method.Read => ReservationRequest.Read(body),
+				Method.Update => ReservationRequest.Update(body),
+				Method.Delete => ReservationRequest.Delete(body),
+				_ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+			},
+			nameof(Schedule) => method switch
+			{
+				Method.Create => ScheduleRequest.Create(body),
+				Method.Read => ScheduleRequest.Read(body),
+				Method.Update => ScheduleRequest.Update(body),
+				Method.Delete => ScheduleRequest.Delete(body),
+				_ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+			},
+			_ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
         };
 
         return IsPropertiesValid(value, method) ? value : CustomResponse.Create("error", "Invalid properties");
