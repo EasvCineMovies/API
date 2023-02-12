@@ -26,8 +26,6 @@ internal class ReservationTests
 	private int _minCinemaId;
 	private int _minScheduleId;
 	
-	private UserTests userTests = new();
-
 	[SetUp]
 	public void Setup()
 	{
