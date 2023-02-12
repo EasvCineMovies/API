@@ -1,5 +1,6 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Controllers;
+using DevOpsCineMovies.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -23,9 +24,6 @@ internal class ReservationTests
 	public void Setup()
 	{
 		_id = _context.Reservations.Max(s => s.Id) ?? 0;
-
-		userTests.Setup();
-		userTests.Create().Wait();
 	}
 
 	[Test]
@@ -167,12 +165,6 @@ internal class ReservationTests
 		Assert.That(response, Is.Not.Null);
 		Assert.That(response, Is.Not.Empty);
 		Assert.That(response["status"]!.ToString() == "success", Is.True);
-	}
-
-	[OneTimeTearDown]
-	public void TearDown()
-	{
-		userTests.Delete().Wait();
 	}
 
 }
