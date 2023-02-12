@@ -33,7 +33,7 @@ public class ScheduleController : ControllerBase
 		if (response is not Schedule schedule)
 			return response;
 
-		return await _context.Reservations.FindAsync(schedule.Id) is { } foundSchedule
+		return await _context.Schedules.FindAsync(schedule.Id) is { } foundSchedule
 			? CustomResponse.Create("success", "Schedule found", foundSchedule)
 			: CustomResponse.Create("error", "Schedule not found");
 	}

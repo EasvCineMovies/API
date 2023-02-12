@@ -1,7 +1,12 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,8 +99,8 @@ internal class ScheduleTests
 			{ "id", (_id-2).ToString() },
 			{ "cinemaId", "1" },
 			{ "movieId", "1" },
-			{ "fromTime", "2000-01-01 10:00:00" },
-			{ "toTime", "2000-01-01 11:00:00" }
+			{ "fromTime", "2000-01-01 11:00:00" },
+			{ "toTime", "2000-01-01 12:00:00" }
 		};
 
 		var json = JsonConvert.SerializeObject(body);

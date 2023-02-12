@@ -1,5 +1,10 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +17,15 @@ internal class ReservationTests
 {
 	private readonly MyDbContext _context = new();
 	private int _id;
+	private UserTests userTests = new();
 
 	[SetUp]
 	public void Setup()
 	{
 		_id = _context.Reservations.Max(s => s.Id) ?? 0;
+
+		userTests.Setup();
+		userTests.Create().Wait();
 	}
 
 	[Test]
@@ -100,7 +109,7 @@ internal class ReservationTests
 			{ "movieId", "1" },
 			{ "cinemaId", "1" },
 			{ "scheduleId", "1" },
-			{ "reservationDate", "2000-01-01 10:00:00" },
+			{ "reservationDate", "2000-01-01 11:00:00" },
 			{ "price", "499" }
 		};
 
@@ -159,4 +168,11 @@ internal class ReservationTests
 		Assert.That(response, Is.Not.Empty);
 		Assert.That(response["status"]!.ToString() == "success", Is.True);
 	}
+
+	[OneTimeTearDown]
+	public void TearDown()
+	{
+		userTests.Delete().Wait();
+	}
+
 }
