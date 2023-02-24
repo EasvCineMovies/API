@@ -10,7 +10,7 @@ pipeline {
       steps
       {
         sh "dotnet restore"
-        sh "dotnet build CineMoviesAPI.csproj"
+        sh "dotnet build CineMoviesAPI/CineMoviesAPI.csproj"
         echo "BUILD STAGE HAS BEEN COMPLETED"
       }
     }
