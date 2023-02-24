@@ -19,7 +19,7 @@ pipeline {
       steps
       {
         sh "dotnet restore"
-        sh "dotnet run Tests/Tests.csproj"
+        sh "dotnet test Tests/Tests.csproj"
         echo "TEST STAGE HAS BEEN COMPLETED"
       }
     }
