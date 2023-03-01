@@ -1,5 +1,7 @@
-﻿using DevOpsCineMovies.Entities;
+﻿using System.Runtime.CompilerServices;
+using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Requests;
+using Newtonsoft.Json;
 
 namespace DevOpsCineMovies.Models;
 
@@ -19,13 +21,7 @@ public abstract class Validator
     /// <param name="obj">
     ///     The entity that is being created, read, updated or deleted.
     /// </param>
-    /// <param name="method">
-    ///     The method that is being used to perform the operation, options are:
-    ///     Method.Create,
-    ///     Method.Read,
-    ///     Method.Update,
-    ///     Method.Delete
-    /// </param>
+    /// <param name="memberName"></param>
     /// <typeparam name="T">
     ///     The type of the entity that is being created, read, updated or deleted.
     /// </typeparam>
@@ -33,46 +29,46 @@ public abstract class Validator
     ///     True if the properties are valid, otherwise false.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    private static bool IsPropertiesValid<T>(T obj, Method method)
+    private static bool IsPropertiesValid<T>(T obj, string memberName)
     {
         var properties = obj!.GetType().GetProperties();
 
         foreach (var property in properties)
             if (property.Name == "Id")
-                switch (method)
+                switch (memberName)
                 {
-                    case Method.Create:
+                    case "Create":
                         if (property.GetValue(obj) == null) continue;
                         return false;
-                    case Method.Read:
+                    case "Read":
                         if (property.GetValue(obj) != null) continue;
                         return false;
-                    case Method.Update:
+                    case "Update":
                         if (property.GetValue(obj) != null) continue;
                         return false;
-                    case Method.Delete:
+                    case "Delete":
                         if (property.GetValue(obj) != null) continue;
                         return false;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(method), method, null);
+                        throw new ArgumentOutOfRangeException(memberName, memberName, null);
                 }
             else if (!property.GetMethod.IsVirtual)
-                switch (method)
+                switch (memberName)
                 {
-                    case Method.Create:
+                    case "Create":
                         if (property.GetValue(obj) != null) continue;
                         return false;
-                    case Method.Read:
+                    case "Read":
                         if (property.GetValue(obj) == null) continue;
                         return false;
-                    case Method.Update:
+                    case "Update":
                         if (property.GetValue(obj) != null) continue;
                         return false;
-                    case Method.Delete:
+                    case "Delete":
                         if (property.GetValue(obj) == null) continue;
                         return false;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(method), method, null);
+                        throw new ArgumentOutOfRangeException(memberName, memberName, null);
                 }
 
         return true;
@@ -85,78 +81,27 @@ public abstract class Validator
     /// <param name="requestBody">
     ///     The request body that is being validated.
     /// </param>
-    /// <param name="method">
-    ///     The method that is being used to perform the operation, options are:
-    ///     Method.Create,
-    ///     Method.Read,
-    ///     Method.Update,
-    ///     Method.Delete
-    /// </param>
+    /// <param name="func"></param>
+    /// <param name="memberName"></param>
     /// <typeparam name="T">
     ///     The type of the entity that we expect to operate on.
     /// </typeparam>
     /// <returns>
     ///     The entity that is being created, read, updated or deleted, or a CustomResponse object with the error message.
     /// </returns>
-    public static async Task<object> Body<T>(Stream requestBody, Method method)
+    public static async Task<object> Body<T>(
+        Stream requestBody,
+        Func<dynamic, T> func,
+        [CallerMemberName] string memberName = "")
     {
-        var body = await BodyHandler.Get(requestBody);
+        var requestJson = await new StreamReader(requestBody).ReadToEndAsync();
+        var body = JsonConvert.DeserializeObject(requestJson);
+        
         if (body is null)
             return CustomResponse.Create("error", "Body is null");
 
-        T value = typeof(T).Name switch
-        {
-            nameof(User) => method switch
-            {
-                Method.Create => UserRequest.Create(body),
-                Method.Read => UserRequest.Read(body),
-                Method.Update => UserRequest.Update(body),
-                Method.Delete => UserRequest.Delete(body),
-                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-            },
-            nameof(Movie) => method switch
-            {
-                Method.Create => MovieRequest.Create(body),
-                Method.Read => MovieRequest.Read(body),
-                Method.Update => MovieRequest.Update(body),
-                Method.Delete => MovieRequest.Delete(body),
-                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-            },
-            nameof(Seat) => method switch
-            {
-                Method.Create => SeatRequest.Create(body),
-                Method.Read => SeatRequest.Read(body),
-                Method.Update => SeatRequest.Update(body),
-                Method.Delete => SeatRequest.Delete(body),
-                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-            },
-            nameof(Cinema) => method switch
-            {
-                Method.Create => CinemaRequest.Create(body),
-                Method.Read => CinemaRequest.Read(body),
-                Method.Update => CinemaRequest.Update(body),
-                Method.Delete => CinemaRequest.Delete(body),
-                _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-            },
-			nameof(Reservation) => method switch
-			{
-				Method.Create => ReservationRequest.Create(body),
-				Method.Read => ReservationRequest.Read(body),
-				Method.Update => ReservationRequest.Update(body),
-				Method.Delete => ReservationRequest.Delete(body),
-				_ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-			},
-			nameof(Schedule) => method switch
-			{
-				Method.Create => ScheduleRequest.Create(body),
-				Method.Read => ScheduleRequest.Read(body),
-				Method.Update => ScheduleRequest.Update(body),
-				Method.Delete => ScheduleRequest.Delete(body),
-				_ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
-			},
-			_ => throw new ArgumentOutOfRangeException(nameof(T), typeof(T).Name, null)
-        };
+        T value = func(body);
 
-        return IsPropertiesValid(value, method) ? value : CustomResponse.Create("error", "Invalid properties");
+        return (IsPropertiesValid(value, memberName) ? value : CustomResponse.Create("error", "Invalid properties"))!;
     }
 }
