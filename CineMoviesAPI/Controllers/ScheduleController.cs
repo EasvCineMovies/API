@@ -1,6 +1,7 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Models;
+using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevOpsCineMovies.Controllers;
@@ -15,7 +16,7 @@ public class ScheduleController : ControllerBase
 	[Route(nameof(Create))]
 	public async Task<object> Create()
 	{
-		var response = await Validator.Body<Schedule>(Request.Body, Method.Create);
+		var response = await Validator.Body<Schedule>(Request.Body, d => ScheduleRequest.Create(d));
 		if (response is not Schedule schedule)
 			return response;
 
@@ -29,7 +30,7 @@ public class ScheduleController : ControllerBase
 	[Route(nameof(Read))]
 	public async Task<object> Read()
 	{
-		var response = await Validator.Body<Schedule>(Request.Body, Method.Read);
+		var response = await Validator.Body<Schedule>(Request.Body, d => ScheduleRequest.Read(d));
 		if (response is not Schedule schedule)
 			return response;
 
@@ -42,7 +43,7 @@ public class ScheduleController : ControllerBase
 	[Route(nameof(Update))]
 	public async Task<object> Update()
 	{
-		var response = await Validator.Body<Schedule>(Request.Body, Method.Update);
+		var response = await Validator.Body<Schedule>(Request.Body, d => ScheduleRequest.Update(d));
 		if (response is not Schedule schedule)
 			return response;
 
@@ -64,7 +65,7 @@ public class ScheduleController : ControllerBase
 	[Route(nameof(Delete))]
 	public async Task<object> Delete()
 	{
-		var response = await Validator.Body<Schedule>(Request.Body, Method.Delete);
+		var response = await Validator.Body<Schedule>(Request.Body, d => ScheduleRequest.Delete(d));
 		if (response is not Schedule schedule)
 			return response;
 

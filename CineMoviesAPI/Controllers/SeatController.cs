@@ -1,6 +1,7 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Models;
+using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevOpsCineMovies.Controllers;
@@ -15,7 +16,7 @@ public class SeatController : ControllerBase
     [Route(nameof(Create))]
     public async Task<object> Create()
     {
-        var response = await Validator.Body<Seat>(Request.Body, Method.Create);
+        var response = await Validator.Body<Seat>(Request.Body, d => SeatRequest.Create(d));
         if (response is not Seat seat)
             return response;
 
@@ -29,7 +30,7 @@ public class SeatController : ControllerBase
     [Route(nameof(Read))]
     public async Task<object> Read()
     {
-        var response = await Validator.Body<Seat>(Request.Body, Method.Read);
+        var response = await Validator.Body<Seat>(Request.Body, d => SeatRequest.Read(d));
         if (response is not Seat seat)
             return response;
 
@@ -42,7 +43,7 @@ public class SeatController : ControllerBase
     [Route(nameof(Update))]
     public async Task<object> Update()
     {
-        var response = await Validator.Body<Seat>(Request.Body, Method.Update);
+        var response = await Validator.Body<Seat>(Request.Body, d => SeatRequest.Update(d));
         if (response is not Seat seat)
             return response;
 
@@ -62,7 +63,7 @@ public class SeatController : ControllerBase
     [Route(nameof(Delete))]
     public async Task<object> Delete()
     {
-        var response = await Validator.Body<Seat>(Request.Body, Method.Delete);
+        var response = await Validator.Body<Seat>(Request.Body, d => SeatRequest.Delete(d));
         if (response is not Seat seat)
             return response;
 
