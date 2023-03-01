@@ -1,6 +1,7 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Models;
+using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevOpsCineMovies.Controllers;
@@ -32,7 +33,7 @@ public class UserController : ControllerBase
     [Route(nameof(Create))]
     public async Task<object> Create()
     {
-        var response = await Validator.Body<User>(Request.Body, Method.Create);
+        var response = await Validator.Body<User>(Request.Body, d => UserRequest.Create(d));
         if (response is not User user)
             return response;
 
@@ -46,7 +47,7 @@ public class UserController : ControllerBase
     [Route(nameof(Read))]
     public async Task<object> Read()
     {
-        var response = await Validator.Body<User>(Request.Body, Method.Read);
+        var response = await Validator.Body<User>(Request.Body, d => UserRequest.Read(d));
         if (response is not User user)
             return response;
 
@@ -59,7 +60,7 @@ public class UserController : ControllerBase
     [Route(nameof(Update))]
     public async Task<object> Update()
     {
-        var response = await Validator.Body<User>(Request.Body, Method.Update);
+        var response = await Validator.Body<User>(Request.Body, d => UserRequest.Update(d));
         if (response is not User user)
             return response;
 
@@ -80,7 +81,7 @@ public class UserController : ControllerBase
     [Route(nameof(Delete))]
     public async Task<object> Delete()
     {
-        var response = await Validator.Body<User>(Request.Body, Method.Delete);
+        var response = await Validator.Body<User>(Request.Body, d => UserRequest.Delete(d));
         if (response is not User user)
             return response;
 

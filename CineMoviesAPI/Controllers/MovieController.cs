@@ -1,6 +1,7 @@
 ﻿using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Models;
+using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevOpsCineMovies.Controllers;
@@ -18,7 +19,7 @@ public class MovieController : ControllerBase
     [Route(nameof(Create))]
     public async Task<object> Create()
     {
-        var response = await Validator.Body<Movie>(Request.Body, Method.Create);
+        var response = await Validator.Body<Movie>(Request.Body, d => MovieRequest.Create(d));
         if (response is not Movie movie)
             return response;
 
@@ -32,7 +33,7 @@ public class MovieController : ControllerBase
     [Route(nameof(Read))]
     public async Task<object> Read()
     {
-        var response = await Validator.Body<Movie>(Request.Body, Method.Read);
+        var response = await Validator.Body<Movie>(Request.Body, d => MovieRequest.Read(d));
         if (response is not Movie movie)
             return response;
 
@@ -45,7 +46,7 @@ public class MovieController : ControllerBase
     [Route(nameof(Update))]
     public async Task<object> Update()
     {
-        var response = await Validator.Body<Movie>(Request.Body, Method.Update);
+        var response = await Validator.Body<Movie>(Request.Body, d => MovieRequest.Update(d));
         if (response is not Movie movie)
             return response;
 
@@ -67,7 +68,7 @@ public class MovieController : ControllerBase
     [Route(nameof(Delete))]
     public async Task<object> Delete()
     {
-        var response = await Validator.Body<Movie>(Request.Body, Method.Delete);
+        var response = await Validator.Body<Movie>(Request.Body, d => MovieRequest.Delete(d));
         if (response is not Movie movie)
             return response;
 
