@@ -22,9 +22,13 @@ pipeline {
         echo "BUILD STAGE HAS BEEN COMPLETED"
       }
     }
-    stage("TEST"){
+    stage("TEST")
+    {
       steps
       {
+        sh "dotnet restore"
+        sh "dotnet test Tests/Tests.csproj"
+        echo "TEST STAGE HAS BEEN COMPLETED"
         dir("Tests")
         {
           sh "dotnet add package  coverlet.collector"
@@ -40,15 +44,6 @@ pipeline {
           [[failUnhealthy: true, thresholdTarget: 'Conditional', unhealthyThreshold: 80.0, unstableThreshold: 50.0]])], checksName: '',
           sourceFileResolver: sourceFiles('NEVER STORE')
         }
-      }
-    }
-    stage("TEST")
-    {
-      steps
-      {
-        sh "dotnet restore"
-        sh "dotnet test Tests/Tests.csproj"
-        echo "TEST STAGE HAS BEEN COMPLETED"
       }
     }
     stage("DEPLOY")
