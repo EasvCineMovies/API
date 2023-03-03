@@ -5,7 +5,14 @@ pipeline {
   }
   stages
   {
-   
+    stage("STARTUP")
+    {
+      steps
+      {
+        dir("Tests")
+        sh "rm -rf TestResults"
+      }
+    }
     stage("BUILD")
     {
       steps
