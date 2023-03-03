@@ -31,11 +31,11 @@ pipeline {
       {
         dir("Tests")
         { 
+          sh "dotnet add package coverlet.collector"
+          sh "dotnet test --collect:'XPlat Code Coverage'"
           sh "dotnet restore"
           sh "dotnet test Tests.csproj"
           echo "TEST STAGE HAS BEEN COMPLETED"
-          sh "dotnet add package coverlet.collector"
-          sh "dotnet test --collect:'XPlat Code Coverage'"
         }
       }
       post
