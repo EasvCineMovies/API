@@ -33,13 +33,19 @@ public class MovieController : ControllerBase
     [Route(nameof(Read))]
     public async Task<object> Read()
     {
-        var response = await Validator.Body<Movie>(Request.Body, d => MovieRequest.Read(d));
-        if (response is not Movie movie)
+        var response = await Validator.Body<Cinema>(Request.Body, d => CinemaRequest.Read(d));
+        if (response is not Cinema cinema)
             return response;
 
-        return await _context.Movies.FindAsync(movie.Id) is { } foundMovie
-            ? CustomResponse.Create("success", "Movie found", foundMovie)
-            : CustomResponse.Create("error", "Movie not found");
+        var foundCinema = await _context.Cinemas.FindAsync(cinema.Id);
+        if (foundCinema is null)
+            return CustomResponse.Create("error", "Cinema not found");
+
+        var movies = from m in _context.Movies
+            where m.CinemaId == foundCinema.Id
+            select Sanitizer.RemoveVirtual(m);
+
+        return CustomResponse.Create("success", $"Movies for cinema {foundCinema.Id} read", movies); 
     }
 
     [HttpPost]
