@@ -49,6 +49,9 @@ public abstract class Validator
                     case "Delete":
                         if (property.GetValue(obj) != null) continue;
                         return false;
+                    case "ReadAll":
+                        if (property.GetValue(obj) != null) continue;
+                        return false;
                     default:
                         throw new ArgumentOutOfRangeException(memberName, memberName, null);
                 }
@@ -65,6 +68,9 @@ public abstract class Validator
                         if (property.GetValue(obj) != null) continue;
                         return false;
                     case "Delete":
+                        if (property.GetValue(obj) == null) continue;
+                        return false;
+                    case "ReadAll":
                         if (property.GetValue(obj) == null) continue;
                         return false;
                     default:

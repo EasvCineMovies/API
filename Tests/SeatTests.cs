@@ -86,6 +86,38 @@ public class SeatTests
     }
     
     [Test]
+    public async Task ReadAll()
+    {
+        var body = new Dictionary<string, string>
+        {
+            { "id", "1" }
+        };
+        
+        var json = JsonConvert.SerializeObject(body);
+        var request = new DefaultHttpContext
+        {
+            Request =
+            {
+                Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
+            }
+        };
+        var seatController = new SeatController
+        {
+            ControllerContext = new ControllerContext
+            {
+                HttpContext = request
+            }
+        };
+        
+        var r = JsonConvert.SerializeObject(await seatController.ReadAll());
+        var response = JObject.Parse(r);
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.Not.Empty);
+        Assert.That(response["status"]!.ToString() == "success", Is.True);
+    }
+    
+    [Test]
     public async Task Update()
     {
         var body = new Dictionary<string, string>

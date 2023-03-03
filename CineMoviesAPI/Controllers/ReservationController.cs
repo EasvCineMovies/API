@@ -30,13 +30,19 @@ public class ReservationController : ControllerBase
 	[Route(nameof(Read))]
 	public async Task<object> Read()
 	{
-		var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Read(d));
-		if (response is not Reservation reservation)
+		var response = await Validator.Body<User>(Request.Body, d => UserRequest.Read(d));
+		if (response is not User user)
 			return response;
+		
+		var foundUser = await _context.Users.FindAsync(user.Id);
+		if (foundUser is null)
+			return CustomResponse.Create("error", "User not found");
 
-		return await _context.Reservations.FindAsync(reservation.Id) is { } foundReservation
-			? CustomResponse.Create("success", "Reservation found", foundReservation)
-			: CustomResponse.Create("error", "Reservation not found");
+		var reservations = from r in _context.Reservations
+			where r.UserId == foundUser.Id
+			select Sanitizer.RemoveVirtual(r);
+
+		return CustomResponse.Create("success", $"Reservations for user {foundUser.Id} read", reservations);
 	}
 
 	[HttpPost]

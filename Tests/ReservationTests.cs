@@ -19,13 +19,13 @@ internal class ReservationTests
 {
 	private readonly MyDbContext _context = new();
 	private int _id;
-	
+
 	private int _minUserId;
 	private int _minSeatId;
 	private int _minMovieId;
 	private int _minCinemaId;
 	private int _minScheduleId;
-	
+
 	[SetUp]
 	public void Setup()
 	{
@@ -80,7 +80,7 @@ internal class ReservationTests
 	{
 		var body = new Dictionary<string, string>
 		{
-			{ "id", (_id-1).ToString() }
+			{ "id", "3" }
 		};
 
 		var json = JsonConvert.SerializeObject(body);
@@ -99,7 +99,8 @@ internal class ReservationTests
 			}
 		};
 
-		var r = JsonConvert.SerializeObject(await reservationController.Read());
+		var asd = await reservationController.Read();
+		var r = JsonConvert.SerializeObject(asd);
 		var response = JObject.Parse(r);
 
 		Assert.That(response, Is.Not.Null);

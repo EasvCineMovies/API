@@ -3,6 +3,7 @@ using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Models;
 using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevOpsCineMovies.Controllers;
 
@@ -30,13 +31,19 @@ public class ScheduleController : ControllerBase
 	[Route(nameof(Read))]
 	public async Task<object> Read()
 	{
-		var response = await Validator.Body<Schedule>(Request.Body, d => ScheduleRequest.Read(d));
-		if (response is not Schedule schedule)
+		var response = await Validator.Body<Cinema>(Request.Body, d => CinemaRequest.Read(d));
+		if (response is not Cinema cinema)
 			return response;
+		
+		var foundCinema = await _context.Cinemas.FindAsync(cinema.Id);
+		if (foundCinema is null)
+			return CustomResponse.Create("error", "Cinema not found");
+		
+		var schedules = from s in _context.Schedules
+			where s.CinemaId == foundCinema.Id
+			select Sanitizer.RemoveVirtual(s);
 
-		return await _context.Schedules.FindAsync(schedule.Id) is { } foundSchedule
-			? CustomResponse.Create("success", "Schedule found", foundSchedule)
-			: CustomResponse.Create("error", "Schedule not found");
+		return CustomResponse.Create("success", $"Schedules for cinema {foundCinema.Id} read", schedules);
 	}
 
 	[HttpPost]
