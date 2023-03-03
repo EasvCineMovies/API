@@ -22,7 +22,7 @@ pipeline {
         echo "BUILD STAGE HAS BEEN COMPLETED"
       }
     }
-    stages("TEST"){
+    stage("TEST"){
       steps
       {
         dir("Tests")
