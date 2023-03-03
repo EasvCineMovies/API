@@ -10,8 +10,10 @@ pipeline {
       steps
       {
         dir("Tests")
-        sh "rm -rf TestResults"
-        echo "STARTUP STAGE HAS BEEN COMPLETED"
+        {
+          sh "rm -rf TestResults"
+          echo "STARTUP STAGE HAS BEEN COMPLETED"
+        }
       }
     }
     stage("BUILD")
