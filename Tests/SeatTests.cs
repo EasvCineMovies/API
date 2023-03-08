@@ -58,7 +58,7 @@ public class SeatTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id-1).ToString() }
+            { "id", _id.ToString() }
         };
         
         var json = JsonConvert.SerializeObject(body);
@@ -122,7 +122,7 @@ public class SeatTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id-2).ToString() },
+            { "id", _id.ToString() },
             { "row", "1" },
             { "column", "1" },
             { "cinemaId", "1" },
@@ -157,7 +157,7 @@ public class SeatTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id-3).ToString() }
+            { "id", _id.ToString() }
         };
         
         var json = JsonConvert.SerializeObject(body);

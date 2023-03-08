@@ -60,7 +60,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 1).ToString() }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -92,7 +92,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 2).ToString() },
+            { "id", _id.ToString() },
             { "name", "John Doeeeefsde" },
             { "phone", "123456789" },
             { "email", "something" },
@@ -128,7 +128,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 3).ToString() }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
