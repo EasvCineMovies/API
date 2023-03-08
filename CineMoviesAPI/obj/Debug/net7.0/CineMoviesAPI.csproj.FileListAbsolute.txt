@@ -152,3 +152,4 @@ C:\Users\patri\Source\Repos\EasvCineMovies\API\CineMoviesAPI\obj\Debug\net7.0\re
 C:\Users\patri\Source\Repos\EasvCineMovies\API\CineMoviesAPI\obj\Debug\net7.0\CineMoviesAPI.pdb
 C:\Users\patri\Source\Repos\EasvCineMovies\API\CineMoviesAPI\obj\Debug\net7.0\CineMoviesAPI.genruntimeconfig.cache
 C:\Users\patri\Source\Repos\EasvCineMovies\API\CineMoviesAPI\obj\Debug\net7.0\ref\CineMoviesAPI.dll
+C:\Users\sonko\RiderProjects\DevOpsCineMovies\CineMoviesAPI\bin\Debug\net7.0\BCrypt.Net-Next.dll

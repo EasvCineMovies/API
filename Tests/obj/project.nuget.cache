@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Kck8rYA9Uwsv2mE62zrKNubdVLxiMeX+L8tXcKoXusI5Jg/kh40Cpc/EMQLzTB+YLy6p2zqIsBuW0QvMxz/Kuw==",
+  "dgSpecHash": "WzjCYrjCGh1GQESQ6Z0wmypV1t7Nxkun55/aL5shzU3hPeHbQd+n9Fc/o0N+NJ46EzQaXFBQhrmyNpuom29wXA==",
   "success": true,
   "projectFilePath": "C:\\Users\\sonko\\RiderProjects\\DevOpsCineMovies\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sonko\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\sonko\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",

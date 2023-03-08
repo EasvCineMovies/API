@@ -45,4 +45,13 @@ public abstract class UserRequest
             Id = body.id
         };
     }
+    
+    public static User Login(dynamic body)
+    {
+        return new User
+        {
+            Phone = body.phone,
+            Password = body.password
+        };
+    }
 }

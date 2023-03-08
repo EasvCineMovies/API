@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "XezZfP/1aUhXtMQs1CIWwbtFLGVNEtWl2FGzoPgJCNsy6GwqHRQ3Vp8pLjHCs4TDz1WBuFf5uM0OTKobEb8I5w==",
+  "dgSpecHash": "NYvYs9Kthhfqw4LbymSZK3mLsY1oZfW4Vz9YotqgZNMS2/rNJ6SnIdGxh9CrgtRUf8N+GPyt26d5NJa5k1BOaw==",
   "success": true,
   "projectFilePath": "C:\\Users\\sonko\\RiderProjects\\DevOpsCineMovies\\CineMoviesAPI\\CineMoviesAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sonko\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\sonko\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.1\\microsoft.aspnetcore.openapi.7.0.1.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

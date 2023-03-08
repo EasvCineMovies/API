@@ -309,3 +309,4 @@ C:\Users\patri\Source\Repos\EasvCineMovies\API\Tests\obj\Debug\net7.0\refint\Tes
 C:\Users\patri\Source\Repos\EasvCineMovies\API\Tests\obj\Debug\net7.0\Tests.pdb
 C:\Users\patri\Source\Repos\EasvCineMovies\API\Tests\obj\Debug\net7.0\Tests.genruntimeconfig.cache
 C:\Users\patri\Source\Repos\EasvCineMovies\API\Tests\obj\Debug\net7.0\ref\Tests.dll
+C:\Users\sonko\RiderProjects\DevOpsCineMovies\Tests\bin\Debug\net7.0\BCrypt.Net-Next.dll
