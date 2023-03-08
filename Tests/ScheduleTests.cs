@@ -96,7 +96,7 @@ internal class ScheduleTests
 	{
 		var body = new Dictionary<string, string>
 		{
-			{ "id", (_id-2).ToString() },
+			{ "id", _id.ToString() },
 			{ "cinemaId", "1" },
 			{ "movieId", "1" },
 			{ "fromTime", "2000-01-01 11:00:00" },
@@ -132,7 +132,7 @@ internal class ScheduleTests
 	{
 		var body = new Dictionary<string, string>
 		{
-			{ "id", (_id-3).ToString() }
+			{ "id", _id.ToString() }
 		};
 
 		var json = JsonConvert.SerializeObject(body);

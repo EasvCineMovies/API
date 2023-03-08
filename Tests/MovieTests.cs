@@ -93,7 +93,7 @@ public async Task Create()
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id-2).ToString() },
+            { "id", _id.ToString() },
             { "name", "Movie test" },
             { "cinemaId", "1" },
             { "description", "Description test" },
@@ -130,7 +130,7 @@ public async Task Create()
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id-3).ToString() }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);

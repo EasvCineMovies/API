@@ -113,7 +113,7 @@ internal class ReservationTests
 	{
 		var body = new Dictionary<string, string>
 		{
-			{ "id", (_id-2).ToString() },
+			{ "id", _id.ToString() },
 			{ "userId", _minUserId.ToString() },
 			{ "seatId", _minSeatId.ToString() },
 			{ "movieId", _minMovieId.ToString() },
@@ -152,7 +152,7 @@ internal class ReservationTests
 	{
 		var body = new Dictionary<string, string>
 		{
-			{ "id", (_id-3).ToString() }
+			{ "id", _id.ToString() }
 		};
 
 		var json = JsonConvert.SerializeObject(body);

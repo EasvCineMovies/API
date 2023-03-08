@@ -57,7 +57,7 @@ public class CinemaTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 1).ToString() }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -89,7 +89,7 @@ public class CinemaTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 2).ToString() },
+            { "id", _id.ToString() },
             { "name", "Cinema test2" },
             { "address", "Address test2" }
         };
@@ -123,7 +123,7 @@ public class CinemaTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", (_id - 3).ToString() }
+            { "id", _id.ToString() }
         };
 
         var json = JsonConvert.SerializeObject(body);
