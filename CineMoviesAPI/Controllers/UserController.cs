@@ -94,4 +94,25 @@ public class UserController : ControllerBase
 
         return CustomResponse.Create("success", "User deleted", dbUser);
     }
+    
+    [HttpPost]
+    [Route(nameof(Login))]
+    public async Task<object> Login()
+    {
+        var response = await Validator.Body<User>(Request.Body, d => UserRequest.Login(d));
+        if (response is not User user)
+            return response;
+
+        var dbUser = (from u in _context.Users
+            where u.Phone == user.Phone
+            select u).FirstOrDefault();
+        
+        if (dbUser is null)
+            return CustomResponse.Create("error", "User not found");
+
+        if (PasswordHelper.ComparePassword(user.Password!, dbUser.Password!) is false)
+            return CustomResponse.Create("error", "Wrong password");
+
+        return CustomResponse.Create("success", "User logged in", dbUser);
+    }
 }

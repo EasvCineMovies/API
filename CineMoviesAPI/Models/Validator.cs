@@ -52,6 +52,9 @@ public abstract class Validator
                     case "ReadAll":
                         if (property.GetValue(obj) != null) continue;
                         return false;
+                    case "Login":
+                        if (property.GetValue(obj) == null) continue;
+                        return false;
                     default:
                         throw new ArgumentOutOfRangeException(memberName, memberName, null);
                 }
@@ -71,6 +74,10 @@ public abstract class Validator
                         if (property.GetValue(obj) == null) continue;
                         return false;
                     case "ReadAll":
+                        if (property.GetValue(obj) == null) continue;
+                        return false;
+                    case "Login":
+                        if (property.Name is "Password" or "Phone" && property.GetValue(obj) != null) continue;
                         if (property.GetValue(obj) == null) continue;
                         return false;
                     default:
