@@ -59,6 +59,39 @@ public async Task Create()
     [Test]
     public async Task Read()
     {
+        var body = new Dictionary<string, string>
+        {
+            { "id", _id.ToString() }
+        };
+        
+        var json = JsonConvert.SerializeObject(body);
+        var request = new DefaultHttpContext
+        {
+            Request =
+            {
+                Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
+            }
+        };
+        
+        var movieController = new MovieController
+        {
+            ControllerContext = new ControllerContext
+            {
+                HttpContext = request
+            }
+        };
+        
+        var r = JsonConvert.SerializeObject(await movieController.Read());
+        var response = JObject.Parse(r);
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.Not.Empty);
+        Assert.That(response["status"]!.ToString() == "success", Is.True);
+    }
+
+    [Test]
+    public async Task ReadAll()
+    {
        var body = new Dictionary<string, string>
         {
             { "id", "1" }
@@ -80,7 +113,7 @@ public async Task Create()
             }
         };
         
-        var r = JsonConvert.SerializeObject(await movieController.Read());
+        var r = JsonConvert.SerializeObject(await movieController.ReadAll());
         var response = JObject.Parse(r);
 
         Assert.That(response, Is.Not.Null);
