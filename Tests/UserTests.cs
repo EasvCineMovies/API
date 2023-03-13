@@ -160,8 +160,8 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "phone", "asd" },
-            { "password", "asd" }
+            { "phone", "bobthephone" },
+            { "password", "bobthepassword" }
         };
         
         var json = JsonConvert.SerializeObject(body);

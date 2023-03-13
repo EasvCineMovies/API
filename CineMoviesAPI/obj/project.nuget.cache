@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NYvYs9Kthhfqw4LbymSZK3mLsY1oZfW4Vz9YotqgZNMS2/rNJ6SnIdGxh9CrgtRUf8N+GPyt26d5NJa5k1BOaw==",
+  "dgSpecHash": "7EqsDyd3fVr9dvOPnKtoffzbArSfCAiCyo95NcQQXO7RBjGXgg+DL6YuRXRaINIMXv83kODYBFNI/xttGYNstg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sonko\\RiderProjects\\DevOpsCineMovies\\CineMoviesAPI\\CineMoviesAPI.csproj",
+  "projectFilePath": "C:\\Users\\sonko\\RiderProjects\\api\\CineMoviesAPI\\CineMoviesAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sonko\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\sonko\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
