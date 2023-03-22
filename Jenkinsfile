@@ -1,7 +1,7 @@
 pipeline {
   agent any
   triggers {
-    pollSCM("@daily")
+    pollSCM('H/5 * * * *')
   }
   stages
   {
