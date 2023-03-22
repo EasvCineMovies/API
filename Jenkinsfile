@@ -5,14 +5,14 @@ pipeline {
   }
   stages
   {
-    stage("STARTUP")
+    stage("CLEANUP")
     {
       steps
       {
         dir("Tests")
         {
           sh "rm -rf TestResults"
-          echo "STARTUP STAGE HAS BEEN COMPLETED"
+          echo "CLEANUP STAGE HAS BEEN COMPLETED"
         }
       }
     }
