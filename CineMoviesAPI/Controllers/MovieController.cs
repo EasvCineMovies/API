@@ -41,7 +41,7 @@ public class MovieController : ControllerBase
             ? CustomResponse.Create("success", "Movie found", foundMovie)
             : CustomResponse.Create("error", "Movie not found");
     }
-    
+
     [HttpPost]
     [Route(nameof(ReadAll))]
     public async Task<object> ReadAll()
@@ -58,7 +58,7 @@ public class MovieController : ControllerBase
             where m.CinemaId == foundCinema.Id
             select Sanitizer.RemoveVirtual(m);
 
-        return CustomResponse.Create("success", $"Movies for cinema {foundCinema.Id} read", movies); 
+        return CustomResponse.Create("success", $"Movies for cinema {foundCinema.Id} read", movies);
     }
 
     [HttpPost]

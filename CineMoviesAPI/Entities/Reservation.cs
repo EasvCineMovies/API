@@ -4,7 +4,7 @@ public class Reservation
 {
     public int? Id { get; set; }
 
-    public int? UserId { get; set; }
+    public string? UserPhone { get; set; }
 
     public int? SeatId { get; set; }
 
@@ -26,5 +26,5 @@ public class Reservation
 
     public virtual Seat? Seat { get; set; }
 
-    public virtual User? User { get; set; }
+    public virtual User? UserPhoneNavigation { get; set; }
 }

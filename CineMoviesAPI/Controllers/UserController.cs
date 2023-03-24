@@ -51,7 +51,7 @@ public class UserController : ControllerBase
         if (response is not User user)
             return response;
 
-        return await _context.Users.FindAsync(user.Id) is { } foundUser
+        return await _context.Users.FindAsync(user.Phone) is { } foundUser
             ? CustomResponse.Create("success", "User found", foundUser)
             : CustomResponse.Create("error", "User not found");
     }
@@ -64,7 +64,7 @@ public class UserController : ControllerBase
         if (response is not User user)
             return response;
 
-        var dbUser = await _context.Users.FindAsync(user.Id);
+        var dbUser = await _context.Users.FindAsync(user.Phone);
         if (dbUser is null)
             return CustomResponse.Create("error", "User not found");
 
@@ -85,7 +85,7 @@ public class UserController : ControllerBase
         if (response is not User user)
             return response;
 
-        var dbUser = await _context.Users.FindAsync(user.Id);
+        var dbUser = await _context.Users.FindAsync(user.Phone);
         if (dbUser is null)
             return CustomResponse.Create("error", "User not found");
 
@@ -94,7 +94,7 @@ public class UserController : ControllerBase
 
         return CustomResponse.Create("success", "User deleted", dbUser);
     }
-    
+
     [HttpPost]
     [Route(nameof(Login))]
     public async Task<object> Login()
@@ -106,7 +106,7 @@ public class UserController : ControllerBase
         var dbUser = (from u in _context.Users
             where u.Phone == user.Phone
             select u).FirstOrDefault();
-        
+
         if (dbUser is null)
             return CustomResponse.Create("error", "User not found");
 
