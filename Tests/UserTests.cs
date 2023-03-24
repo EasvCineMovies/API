@@ -86,7 +86,7 @@ public class UserTests
             { "phone", "bobthephone" },
             { "name", "bobthename" },
             { "email", "bobtheemail" },
-            { "password", "bobthepassword" }
+            { "password", PasswordHelper.HashPassword("bobthepassword") }
         };
 
         var json = JsonConvert.SerializeObject(body);
