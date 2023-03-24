@@ -11,8 +11,8 @@ public abstract class UserRequest
     {
         return new User
         {
-            Name = body.name,
             Phone = body.phone,
+            Name = body.name,
             Email = body.email,
             Password = body.password
         };
@@ -22,7 +22,7 @@ public abstract class UserRequest
     {
         return new User
         {
-            Id = body.id
+            Phone = body.phone
         };
     }
 
@@ -30,9 +30,8 @@ public abstract class UserRequest
     {
         return new User
         {
-            Id = body.id,
-            Name = body.name,
             Phone = body.phone,
+            Name = body.name,
             Email = body.email,
             Password = body.password
         };
@@ -42,10 +41,10 @@ public abstract class UserRequest
     {
         return new User
         {
-            Id = body.id
+            Phone = body.phone
         };
     }
-    
+
     public static User Login(dynamic body)
     {
         return new User

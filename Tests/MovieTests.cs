@@ -3,7 +3,6 @@ using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,9 +18,9 @@ public class MovieTests
     {
         _id = _context.Movies.Max(m => m.Id) ?? 0;
     }
-    
+
     [Test]
-public async Task Create()
+    public async Task Create()
     {
         var body = new Dictionary<string, string>
         {
@@ -29,7 +28,7 @@ public async Task Create()
             { "cinemaId", "1" },
             { "description", "Description test" },
             { "duration", "120" },
-            { "genre", "Genre test" },
+            { "genre", "Genre test" }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -63,7 +62,7 @@ public async Task Create()
         {
             { "id", _id.ToString() }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -72,7 +71,7 @@ public async Task Create()
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-        
+
         var movieController = new MovieController
         {
             ControllerContext = new ControllerContext
@@ -80,10 +79,10 @@ public async Task Create()
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await movieController.Read());
         var response = JObject.Parse(r);
-        
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
@@ -92,11 +91,11 @@ public async Task Create()
     [Test]
     public async Task ReadAll()
     {
-       var body = new Dictionary<string, string>
+        var body = new Dictionary<string, string>
         {
             { "id", "1" }
         };
-       
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -112,7 +111,7 @@ public async Task Create()
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await movieController.ReadAll());
         var response = JObject.Parse(r);
 
@@ -120,7 +119,7 @@ public async Task Create()
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-    
+
     [Test]
     public async Task Update()
     {
@@ -131,7 +130,7 @@ public async Task Create()
             { "cinemaId", "1" },
             { "description", "Description test" },
             { "duration", "120" },
-            { "genre", "Genre test" },
+            { "genre", "Genre test" }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -157,7 +156,7 @@ public async Task Create()
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-    
+
     [Test]
     public async Task Delete()
     {

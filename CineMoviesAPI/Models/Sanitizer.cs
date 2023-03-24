@@ -8,8 +8,13 @@ public abstract class Sanitizer
 
         foreach (var property in properties)
             if (property.GetMethod.IsVirtual)
-                try { property.SetValue(obj, null); }
-                catch { }
+                try
+                {
+                    property.SetValue(obj, null);
+                }
+                catch
+                {
+                }
 
         return obj;
     }

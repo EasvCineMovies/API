@@ -10,81 +10,81 @@ namespace DevOpsCineMovies.Controllers;
 [Route("[controller]")]
 public class ReservationController : ControllerBase
 {
-	private readonly MyDbContext _context = new();
+    private readonly MyDbContext _context = new();
 
-	[HttpPost]
-	[Route(nameof(Create))]
-	public async Task<object> Create()
-	{
-		var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Create(d));
-		if (response is not Reservation reservation)
-			return response;
+    [HttpPost]
+    [Route(nameof(Create))]
+    public async Task<object> Create()
+    {
+        var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Create(d));
+        if (response is not Reservation reservation)
+            return response;
 
-		_context.Reservations.Add(reservation);
-		await _context.SaveChangesAsync();
+        _context.Reservations.Add(reservation);
+        await _context.SaveChangesAsync();
 
-		return CustomResponse.Create("success", "Reservation created", reservation);
-	}
+        return CustomResponse.Create("success", "Reservation created", reservation);
+    }
 
-	[HttpPost]
-	[Route(nameof(Read))]
-	public async Task<object> Read()
-	{
-		var response = await Validator.Body<User>(Request.Body, d => UserRequest.Read(d));
-		if (response is not User user)
-			return response;
-		
-		var foundUser = await _context.Users.FindAsync(user.Id);
-		if (foundUser is null)
-			return CustomResponse.Create("error", "User not found");
+    [HttpPost]
+    [Route(nameof(Read))]
+    public async Task<object> Read()
+    {
+        var response = await Validator.Body<User>(Request.Body, d => UserRequest.Read(d));
+        if (response is not User user)
+            return response;
 
-		var reservations = from r in _context.Reservations
-			where r.UserId == foundUser.Id
-			select Sanitizer.RemoveVirtual(r);
+        var foundUser = await _context.Users.FindAsync(user.Phone);
+        if (foundUser is null)
+            return CustomResponse.Create("error", "User not found");
 
-		return CustomResponse.Create("success", $"Reservations for user {foundUser.Id} read", reservations);
-	}
+        var reservations = from r in _context.Reservations
+            where r.UserPhone == foundUser.Phone
+            select Sanitizer.RemoveVirtual(r);
 
-	[HttpPost]
-	[Route(nameof(Update))]
-	public async Task<object> Update()
-	{
-		var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Update(d));
-		if (response is not Reservation reservation)
-			return response;
+        return CustomResponse.Create("success", $"Reservations for user {foundUser.Phone} read", reservations);
+    }
 
-		var dbReservation = await _context.Reservations.FindAsync(reservation.Id);
-		if (dbReservation is null)
-			return CustomResponse.Create("error", "Reservation not found");
+    [HttpPost]
+    [Route(nameof(Update))]
+    public async Task<object> Update()
+    {
+        var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Update(d));
+        if (response is not Reservation reservation)
+            return response;
 
-		dbReservation.UserId = reservation.UserId;
-		dbReservation.SeatId = reservation.SeatId;
-		dbReservation.MovieId = reservation.MovieId;
-		dbReservation.CinemaId = reservation.CinemaId;
-		dbReservation.ScheduleId = reservation.ScheduleId;
-		dbReservation.ReservationDate = reservation.ReservationDate;
-		dbReservation.Price = reservation.Price;
+        var dbReservation = await _context.Reservations.FindAsync(reservation.Id);
+        if (dbReservation is null)
+            return CustomResponse.Create("error", "Reservation not found");
 
-		await _context.SaveChangesAsync();
+        dbReservation.UserPhone = reservation.UserPhone;
+        dbReservation.SeatId = reservation.SeatId;
+        dbReservation.MovieId = reservation.MovieId;
+        dbReservation.CinemaId = reservation.CinemaId;
+        dbReservation.ScheduleId = reservation.ScheduleId;
+        dbReservation.ReservationDate = reservation.ReservationDate;
+        dbReservation.Price = reservation.Price;
 
-		return CustomResponse.Create("success", "Reservation updated", dbReservation);
-	}
+        await _context.SaveChangesAsync();
 
-	[HttpPost]
-	[Route(nameof(Delete))]
-	public async Task<object> Delete()
-	{
-		var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Delete(d));
-		if (response is not Reservation reservation)
-			return response;
+        return CustomResponse.Create("success", "Reservation updated", dbReservation);
+    }
 
-		var dbReservation = await _context.Reservations.FindAsync(reservation.Id);
-		if (dbReservation is null)
-			return CustomResponse.Create("error", "Reservation not found");
+    [HttpPost]
+    [Route(nameof(Delete))]
+    public async Task<object> Delete()
+    {
+        var response = await Validator.Body<Reservation>(Request.Body, d => ReservationRequest.Delete(d));
+        if (response is not Reservation reservation)
+            return response;
 
-		_context.Reservations.Remove(dbReservation);
-		await _context.SaveChangesAsync();
+        var dbReservation = await _context.Reservations.FindAsync(reservation.Id);
+        if (dbReservation is null)
+            return CustomResponse.Create("error", "Reservation not found");
 
-		return CustomResponse.Create("success", "Reservation deleted", dbReservation);
-	}
+        _context.Reservations.Remove(dbReservation);
+        await _context.SaveChangesAsync();
+
+        return CustomResponse.Create("success", "Reservation deleted", dbReservation);
+    }
 }
