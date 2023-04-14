@@ -22,6 +22,7 @@ pipeline {
       {
         sh "dotnet restore"
         sh "dotnet build CineMoviesAPI/CineMoviesAPI.csproj"
+        /*sh "docker-compose up -d"*/
         echo "BUILD STAGE HAS BEEN COMPLETED"
       }
     }
@@ -55,6 +56,12 @@ pipeline {
       {
         echo "Deployment started."
       }
+    }
+  }
+  post {
+    always {
+      /*sh 'docker-compose down'*/
+      echo "POST HAS BEEN COMPLETED"
     }
   }
 }
