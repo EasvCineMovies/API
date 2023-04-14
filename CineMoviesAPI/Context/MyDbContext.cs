@@ -35,7 +35,7 @@ public partial class MyDbContext : DbContext
     {
         modelBuilder.Entity<Cinema>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__cinema__3213E83F106277DE");
+            entity.HasKey(e => e.Id).HasName("PK__cinema__3213E83F524BC91F");
 
             entity.ToTable("cinema");
 
@@ -52,7 +52,7 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<Movie>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__movie__3213E83F10D208EA");
+            entity.HasKey(e => e.Id).HasName("PK__movie__3213E83F6815397A");
 
             entity.ToTable("movie");
 
@@ -79,7 +79,7 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<Reservation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__reservat__3213E83F2937F6E3");
+            entity.HasKey(e => e.Id).HasName("PK__reservat__3213E83FC41BD601");
 
             entity.ToTable("reservation");
 
@@ -94,7 +94,10 @@ public partial class MyDbContext : DbContext
                 .HasColumnName("reservationDate");
             entity.Property(e => e.ScheduleId).HasColumnName("scheduleId");
             entity.Property(e => e.SeatId).HasColumnName("seatId");
-            entity.Property(e => e.UserId).HasColumnName("userId");
+            entity.Property(e => e.UserPhone)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("userPhone");
 
             entity.HasOne(d => d.Cinema).WithMany(p => p.Reservations)
                 .HasForeignKey(d => d.CinemaId)
@@ -112,14 +115,14 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.SeatId)
                 .HasConstraintName("FK__reservati__seatI__6B24EA82");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Reservations)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__reservati__userI__6A30C649");
+            entity.HasOne(d => d.UserPhoneNavigation).WithMany(p => p.Reservations)
+                .HasForeignKey(d => d.UserPhone)
+                .HasConstraintName("FK__reservati__userP__6A30C649");
         });
 
         modelBuilder.Entity<Schedule>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__schedule__3213E83F43E01958");
+            entity.HasKey(e => e.Id).HasName("PK__schedule__3213E83FCAFCEC81");
 
             entity.ToTable("schedule");
 
@@ -144,7 +147,7 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<Seat>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__seat__3213E83F5641D410");
+            entity.HasKey(e => e.Id).HasName("PK__seat__3213E83F8F6C8967");
 
             entity.ToTable("seat");
 
@@ -160,11 +163,14 @@ public partial class MyDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83FE9B33BCB");
+            entity.HasKey(e => e.Phone).HasName("PK__user__B43B145E6AB359CC");
 
             entity.ToTable("user");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("phone");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -177,10 +183,6 @@ public partial class MyDbContext : DbContext
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("password");
-            entity.Property(e => e.Phone)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("phone");
         });
 
         OnModelCreatingPartial(modelBuilder);

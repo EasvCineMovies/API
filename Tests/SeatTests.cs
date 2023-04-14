@@ -12,13 +12,13 @@ public class SeatTests
 {
     private readonly MyDbContext _context = new();
     private int _id;
-    
+
     [SetUp]
     public void Setup()
     {
         _id = _context.Seats.Max(s => s.Id) ?? 0;
     }
-    
+
     [Test]
     public async Task Create()
     {
@@ -26,9 +26,9 @@ public class SeatTests
         {
             { "row", "1" },
             { "column", "1" },
-            { "cinemaId", "1" },
+            { "cinemaId", "1" }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -44,15 +44,15 @@ public class SeatTests
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await seatController.Create());
         var response = JObject.Parse(r);
-        
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-    
+
     [Test]
     public async Task Read()
     {
@@ -60,7 +60,7 @@ public class SeatTests
         {
             { "id", _id.ToString() }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -76,15 +76,15 @@ public class SeatTests
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await seatController.Read());
         var response = JObject.Parse(r);
-        
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-    
+
     [Test]
     public async Task ReadAll()
     {
@@ -92,7 +92,7 @@ public class SeatTests
         {
             { "id", "1" }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -108,15 +108,15 @@ public class SeatTests
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await seatController.ReadAll());
         var response = JObject.Parse(r);
-        
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-    
+
     [Test]
     public async Task Update()
     {
@@ -125,9 +125,9 @@ public class SeatTests
             { "id", _id.ToString() },
             { "row", "1" },
             { "column", "1" },
-            { "cinemaId", "1" },
+            { "cinemaId", "1" }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -143,15 +143,15 @@ public class SeatTests
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await seatController.Update());
         var response = JObject.Parse(r);
-        
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);
     }
-    
+
     [Test]
     public async Task Delete()
     {
@@ -159,7 +159,7 @@ public class SeatTests
         {
             { "id", _id.ToString() }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -175,10 +175,10 @@ public class SeatTests
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await seatController.Delete());
         var response = JObject.Parse(r);
-        
+
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.Not.Empty);
         Assert.That(response["status"]!.ToString() == "success", Is.True);

@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using DevOpsCineMovies.Context;
 using DevOpsCineMovies.Controllers;
+using DevOpsCineMovies.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,24 +10,15 @@ namespace Tests;
 
 public class UserTests
 {
-    private readonly MyDbContext _context = new();
-    private int _id;
-
-    [SetUp]
-    public void Setup()
-    {
-        _id = _context.Users.Max(u => u.Id) ?? 0;
-    }
-
     [Test]
     public async Task Create()
     {
         var body = new Dictionary<string, string>
         {
-            { "name", "John Doe" },
             { "phone", "123456789" },
-            { "email", "something" },
-            { "password", "something" }
+            { "name", "testname" },
+            { "email", "testemail" },
+            { "password", PasswordHelper.HashPassword("testpassword") }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -60,7 +51,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", _id.ToString() }
+            { "phone", "bobthephone" }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -92,11 +83,10 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", _id.ToString() },
-            { "name", "John Doeeeefsde" },
-            { "phone", "123456789" },
-            { "email", "something" },
-            { "password", "something" }
+            { "phone", "bobthephone" },
+            { "name", "bobthename" },
+            { "email", "bobtheemail" },
+            { "password", PasswordHelper.HashPassword("bobthepassword") }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -128,7 +118,7 @@ public class UserTests
     {
         var body = new Dictionary<string, string>
         {
-            { "id", _id.ToString() }
+            { "phone", "123456789" }
         };
 
         var json = JsonConvert.SerializeObject(body);
@@ -163,7 +153,7 @@ public class UserTests
             { "phone", "bobthephone" },
             { "password", "bobthepassword" }
         };
-        
+
         var json = JsonConvert.SerializeObject(body);
         var request = new DefaultHttpContext
         {
@@ -172,7 +162,7 @@ public class UserTests
                 Body = new MemoryStream(Encoding.UTF8.GetBytes(json))
             }
         };
-        
+
         var userController = new UserController
         {
             ControllerContext = new ControllerContext
@@ -180,7 +170,7 @@ public class UserTests
                 HttpContext = request
             }
         };
-        
+
         var r = JsonConvert.SerializeObject(await userController.Login());
         var response = JObject.Parse(r);
         Assert.That(response, Is.Not.Null);

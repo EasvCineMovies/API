@@ -90,8 +90,8 @@ public class CinemaTests
         var body = new Dictionary<string, string>
         {
             { "id", _id.ToString() },
-            { "name", "Cinema test2" },
-            { "address", "Address test2" }
+            { "name", "Cinema test" },
+            { "address", "Address test" }
         };
 
         var json = JsonConvert.SerializeObject(body);

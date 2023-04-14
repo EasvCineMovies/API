@@ -3,7 +3,6 @@ using DevOpsCineMovies.Entities;
 using DevOpsCineMovies.Models;
 using DevOpsCineMovies.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevOpsCineMovies.Controllers;
 
@@ -39,7 +38,7 @@ public class SeatController : ControllerBase
             ? CustomResponse.Create("success", "Seat found", foundSeat)
             : CustomResponse.Create("error", "Seat not found");
     }
-    
+
     [HttpPost]
     [Route(nameof(ReadAll))]
     public async Task<object> ReadAll()
@@ -47,7 +46,7 @@ public class SeatController : ControllerBase
         var response = await Validator.Body<Cinema>(Request.Body, d => CinemaRequest.Read(d));
         if (response is not Cinema cinema)
             return response;
-        
+
         var foundCinema = await _context.Cinemas.FindAsync(cinema.Id);
         if (foundCinema is null)
             return CustomResponse.Create("error", "Cinema not found");

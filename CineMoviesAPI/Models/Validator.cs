@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using DevOpsCineMovies.Entities;
-using DevOpsCineMovies.Requests;
 using Newtonsoft.Json;
 
 namespace DevOpsCineMovies.Models;
@@ -65,12 +64,14 @@ public abstract class Validator
                         if (property.GetValue(obj) != null) continue;
                         return false;
                     case "Read":
+                        if (property.Name is "Phone" && property.GetValue(obj) != null) continue;
                         if (property.GetValue(obj) == null) continue;
                         return false;
                     case "Update":
                         if (property.GetValue(obj) != null) continue;
                         return false;
                     case "Delete":
+                        if (property.Name is "Phone" && property.GetValue(obj) != null) continue;
                         if (property.GetValue(obj) == null) continue;
                         return false;
                     case "ReadAll":
@@ -106,14 +107,15 @@ public abstract class Validator
         Stream requestBody,
         Func<dynamic, T> func,
         [CallerMemberName] string memberName = ""
-        ) {
+    )
+    {
         var requestJson = await new StreamReader(requestBody).ReadToEndAsync();
         var body = JsonConvert.DeserializeObject(requestJson);
-        
+
         if (body is null)
             return CustomResponse.Create("error", "Body is null");
 
-        T value = func(body);
+        var value = func(body);
 
         return (IsPropertiesValid(value, memberName) ? value : CustomResponse.Create("error", "Invalid properties"))!;
     }
